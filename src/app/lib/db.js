@@ -1,8 +1,15 @@
-import pkg from "pg";
-const { Pool } = pkg;
+import { Pool } from "pg";
  
-const pool = new Pool({
+// Para producción (Vercel con Neon), necesitamos SSL.
+// Para desarrollo, no es necesario.
+const poolConfig = {
   connectionString: process.env.DATABASE_URL,
-});
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
+};
+
+const pool = new Pool(poolConfig);
  
 export default pool;

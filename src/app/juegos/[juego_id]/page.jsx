@@ -1,8 +1,9 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
-export default function JuegoPage({ params }) {
-  const { juego_id } = use(params); // ✅ en Next.js 15
+export default function JuegoPage() {
+  const { juego_id } = useParams();
   const [game, setGame] = useState(null);
   const [user, setUser] = useState(null);
 
@@ -60,15 +61,15 @@ export default function JuegoPage({ params }) {
         {/* Imagen del juego */}
         <div className="w-full h-72 md:h-96 bg-black">
           <img
-            src={game.imagen || "https://via.placeholder.com/800x400?text=Juego"}
-            alt={game.nombre}
+            src={game.imagen || "https://via.placeholder.com/800x400?text=SteamPlus"}
+            alt={game.titulo}
             className="w-full h-full object-cover"
           />
         </div>
 
         {/* Detalles */}
         <div className="p-6">
-          <h1 className="text-4xl font-bold text-blue-400 mb-2">{game.nombre}</h1>
+          <h1 className="text-4xl font-bold text-blue-400 mb-2">{game.titulo}</h1>
           <p className="text-gray-300 text-lg mb-4">{game.descripcion}</p>
 
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

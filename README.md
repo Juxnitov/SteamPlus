@@ -65,4 +65,3 @@ Sigue estos pasos para configurar el proyecto en tu entorno local.
     Abre http://localhost:3000 en tu navegador para ver la aplicación.
 
 ## 📁 Estructura del Proyecto (Simplificada)
-
