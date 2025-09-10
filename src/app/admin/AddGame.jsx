@@ -40,11 +40,11 @@ export default function AdminAddGame() {
       if (response.ok) {
         setMensaje(`Juego "${data.titulo}" agregado correctamente`);
         // Limpiar formulario
-        setTitulo("");
-        setDescripcion("");
-        setPrecio("");
-        setStock("");
-        setImagen("");
+        setTitulo(" ");
+        setDescripcion(" ");
+        setPrecio(" ");
+        setStock(" ");
+        setImagen(" ");
         setActivo(true);
       } else {
         setMensaje(`Error: ${data.error}`);

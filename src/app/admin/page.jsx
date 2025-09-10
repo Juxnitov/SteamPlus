@@ -22,9 +22,13 @@ export default function AdminPage() {
       });
       if (!res.ok) throw new Error("Error al agregar juego");
       alert("Juego agregado con éxito");
-      setTitulo("");
-      setPrecio("");
-      setImagen("");
+      setNuevoJuego({
+        titulo: "",
+        descripcion: "",
+        precio: "",
+        stock: "",
+        imagen: "",
+      });
     } catch (error) {
       console.error(error);
       alert(error.message);

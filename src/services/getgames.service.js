@@ -8,7 +8,7 @@ export const getGames = async () => {
   // Convertir precio a número
   const juegos = result.rows.map((juego) => ({
     ...juego,
-    precio: parseFloat(juego.precio), // ahora precio es number
+    precio: parseFloat(juego.precio),
   }));
 
   return juegos;

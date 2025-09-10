@@ -7,8 +7,16 @@ export default function RegisterPage() {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const register = async () => {
+    // Validación de campos vacíos
+    if (!nombre || !email || !password) {
+      setError("Todos los campos son obligatorios.");
+      return;
+    }
+    setError(""); // Limpiar errores previos
+
     const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -16,11 +24,13 @@ export default function RegisterPage() {
     });
 
     if (res.ok) {
-      // Guardar nombre y rol
       localStorage.setItem("user", JSON.stringify({ nombre, email, rol: "cliente" }));
       window.dispatchEvent(new Event("userChanged"));
       router.push("/juegos");
-    } else alert("Error al registrarse");
+    } else {
+      const data = await res.json();
+      setError(data.error || "Error al registrarse. Inténtalo de nuevo.");
+    }
   };
 
   return (
@@ -32,6 +42,7 @@ export default function RegisterPage() {
           type="text"
           placeholder="Nombre"
           value={nombre}
+          required
           onChange={(e) => setNombre(e.target.value)}
         />
         <input
@@ -39,6 +50,7 @@ export default function RegisterPage() {
           type="email"
           placeholder="Email"
           value={email}
+          required
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
@@ -46,8 +58,12 @@ export default function RegisterPage() {
           type="password"
           placeholder="Contraseña"
           value={password}
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
+        {error && (
+          <p className="text-red-400 text-sm mb-4 text-center">{error}</p>
+        )}
         <button onClick={register} className="bg-green-600 hover:bg-green-700 p-2 rounded text-white font-bold">
           Registrarse
         </button>
